@@ -24,6 +24,7 @@ var objects;
             // Default position
             _this.x = x;
             _this.y = y;
+            createjs.Sound.registerSound("../Assets/waterdrop.mp3", "waterdrop");
             // Set up event handlers
             _this.on("mouseover", _this.MouseOver);
             _this.on("mouseout", _this.MouseOut);
@@ -33,6 +34,7 @@ var objects;
         // Event Handlers
         Button.prototype.MouseOver = function () {
             this.alpha = 0.85;
+            createjs.Sound.play("waterdrop");
         };
         Button.prototype.MouseOut = function () {
             this.alpha = 1.0;

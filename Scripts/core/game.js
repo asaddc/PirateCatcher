@@ -13,6 +13,7 @@
             { id: "muddyBackground", src: "./Assets/muddy_background.png" },
             { id: "pirate", src: "./Assets/pirate.png" },
             { id: "playButton", src: "./Assets/playButton.png" },
+            { id: "quitButton", src: "./Assets/quitButton.png" },
         ];
         assetManager = new createjs.LoadQueue();
         assetManager.installPlugin(createjs.Sound);
@@ -24,8 +25,8 @@
         // Initialize CreateJS
         stage = new createjs.Stage(canvas);
         stage.enableMouseOver(20);
-        createjs.Ticker.framerate = 60;
-        createjs.Ticker.on("tick", Update);
+        createjs.Ticker.framerate = 120;
+        SetUpTickerEvent();
         // Set up default game states -- State Machine
         objects.Game.currentScene = config.Scene.MAIN_MENU;
         currentState = config.Scene.MAIN_MENU;
@@ -40,6 +41,10 @@
         currentScene.Update();
         stage.update();
     }
+    function SetUpTickerEvent() {
+        createjs.Ticker.reset();
+        createjs.Ticker.on("tick", Update);
+    }
     function Main() {
         console.log("Game Start");
         // Finite State Machine
@@ -51,14 +56,15 @@
                 break;
             case config.Scene.PLAY:
                 stage.removeAllChildren();
+                SetUpTickerEvent();
                 currentScene = new scenes.PlayScene(assetManager);
                 stage.addChild(currentScene);
                 break;
-            // case config.Scene.GAME_OVER:
-            //   stage.removeAllChildren();
-            //   currentScene = new scenes.GameOverScene(assetManager);
-            //   stage.addChild(currentScene);
-            //   break;
+            case config.Scene.GAME_OVER:
+                stage.removeAllChildren();
+                currentScene = new scenes.GameOverScene(assetManager);
+                stage.addChild(currentScene);
+                break;
         }
         currentState = objects.Game.currentScene;
     }

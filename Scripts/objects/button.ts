@@ -14,6 +14,8 @@ module objects {
       this.x = x;
       this.y = y;
 
+      createjs.Sound.registerSound("../Assets/waterdrop.mp3", "waterdrop");
+
       // Set up event handlers
       this.on("mouseover", this.MouseOver);
       this.on("mouseout", this.MouseOut);
@@ -22,6 +24,7 @@ module objects {
     // Event Handlers
     private MouseOver(): void {
       this.alpha = 0.85;
+      createjs.Sound.play("waterdrop");
     }
 
     private MouseOut(): void {

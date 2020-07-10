@@ -2,7 +2,6 @@ module scenes {
   export class PlayScene extends objects.Scene {
     // Variables
     private timer: objects.Label;
-    private timerWhenSceneStarted: number;
     private background: objects.Background;
     private pirate: objects.Pirate;
     // Constructor
@@ -23,22 +22,15 @@ module scenes {
       );
 
       this.background = new objects.Background(this.assetManager);
-      this.timer = new objects.Label("0", "50px", "Consolas", "blue", 20, 20);
-
-      createjs.Ticker.framerate = 120;
-      this.timerWhenSceneStarted = createjs.Ticker.getEventTime();
-      createjs.Ticker.on("tick", this.Update);
+      this.timer = new objects.Label("0", "50px", "Bangers", "blue", 20, 20);
 
       this.Main();
     }
 
     public Update(): void {
       if (this.timer != null) {
-        console.log(this.timer);
-        this.timer.text = (
-          (createjs.Ticker.getEventTime() - this.timerWhenSceneStarted) /
-          1000
-        ).toFixed(2);
+        // console.log(this.timer);
+        this.timer.text = (createjs.Ticker.getEventTime() / 1000).toFixed(2);
       }
     }
 
@@ -52,10 +44,8 @@ module scenes {
     }
 
     private PirateCaught(): void {
-      // objects.Game.currentScene = config.Scene.GAME_OVER;
-      // stage.removeAllChildren();
-      //   currentScene = new scenes.GameOverScene(assetManager);
-      //   stage.addChild(currentScene);
+      objects.Game.timer = (createjs.Ticker.getEventTime() / 1000).toFixed(2);
+      objects.Game.currentScene = config.Scene.GAME_OVER;
     }
 
     private GetRandomValue(upperLimit: number): number {

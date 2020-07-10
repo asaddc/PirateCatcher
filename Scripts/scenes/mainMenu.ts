@@ -16,7 +16,7 @@ module scenes {
       this.welcomeLabel = new objects.Label(
         "Pirate Catcher!",
         "60px",
-        "Consolas",
+        "Bangers",
         "Blue",
         450,
         120,

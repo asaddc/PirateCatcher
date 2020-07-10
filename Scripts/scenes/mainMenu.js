@@ -24,7 +24,7 @@ var scenes;
         // Methods
         MainMenuScene.prototype.Start = function () {
             // Initialize our objects for this scene
-            this.welcomeLabel = new objects.Label("Pirate Catcher!", "60px", "Consolas", "Blue", 450, 120, true);
+            this.welcomeLabel = new objects.Label("Pirate Catcher!", "60px", "Bangers", "Blue", 450, 120, true);
             // NOTE: PreloadJS manifest id
             this.startButton = new objects.Button(this.assetManager, "playButton", 300, 300);
             this.background = new objects.Background(this.assetManager);

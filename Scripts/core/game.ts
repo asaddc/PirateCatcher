@@ -9,7 +9,7 @@
   let currentScene: objects.Scene;
   let currentState: number;
 
-  function Init() {
+  function Init(): void {
     console.log("Initializing Start");
 
     assetManifest = [
@@ -17,6 +17,7 @@
       { id: "muddyBackground", src: "./Assets/muddy_background.png" },
       { id: "pirate", src: "./Assets/pirate.png" },
       { id: "playButton", src: "./Assets/playButton.png" },
+      { id: "quitButton", src: "./Assets/quitButton.png" },
     ];
 
     assetManager = new createjs.LoadQueue();
@@ -25,15 +26,15 @@
     assetManager.on("complete", Start, this);
   }
 
-  function Start() {
+  function Start(): void {
     console.log("Starting Application...");
 
     // Initialize CreateJS
     stage = new createjs.Stage(canvas);
     stage.enableMouseOver(20);
 
-    createjs.Ticker.framerate = 60;
-    createjs.Ticker.on("tick", Update);
+    createjs.Ticker.framerate = 120;
+    SetUpTickerEvent();
 
     // Set up default game states -- State Machine
     objects.Game.currentScene = config.Scene.MAIN_MENU;
@@ -41,7 +42,7 @@
     Main();
   }
 
-  function Update() {
+  function Update(): void {
     // Has my state changed since the last check?
     if (currentState != objects.Game.currentScene) {
       console.log("Changing scenes to " + objects.Game.currentScene);
@@ -52,7 +53,12 @@
     stage.update();
   }
 
-  function Main() {
+  function SetUpTickerEvent(): void {
+    createjs.Ticker.reset();
+    createjs.Ticker.on("tick", Update);
+  }
+
+  function Main(): void {
     console.log("Game Start");
 
     // Finite State Machine
@@ -64,14 +70,15 @@
         break;
       case config.Scene.PLAY:
         stage.removeAllChildren();
+        SetUpTickerEvent();
         currentScene = new scenes.PlayScene(assetManager);
         stage.addChild(currentScene);
         break;
-      // case config.Scene.GAME_OVER:
-      //   stage.removeAllChildren();
-      //   currentScene = new scenes.GameOverScene(assetManager);
-      //   stage.addChild(currentScene);
-      //   break;
+      case config.Scene.GAME_OVER:
+        stage.removeAllChildren();
+        currentScene = new scenes.GameOverScene(assetManager);
+        stage.addChild(currentScene);
+        break;
     }
 
     currentState = objects.Game.currentScene;
