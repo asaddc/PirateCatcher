@@ -25,25 +25,28 @@ var objects;
             _this.x = x;
             _this.y = y;
             // Set up event handlers
-            _this.on("mouseover", _this.mouseOver);
-            _this.on("mouseout", _this.mouseOut);
-            _this.makePirateJump();
+            _this.on("mouseover", _this.MouseOver);
+            _this.on("mouseout", _this.MouseOut);
+            _this.MakePirateJump();
             return _this;
         }
         // Methods
         // Event Handlers
-        Pirate.prototype.mouseOver = function () {
+        Pirate.prototype.MouseOver = function () {
             this.alpha = 0.85;
         };
-        Pirate.prototype.mouseOut = function () {
+        Pirate.prototype.MouseOut = function () {
             this.alpha = 1.0;
         };
-        Pirate.prototype.makePirateJump = function () {
+        Pirate.prototype.MakePirateJump = function () {
             var _this = this;
             setInterval(function () {
-                _this.x = Math.floor(Math.random() * (895 - 1 + 1)) + 1;
-                _this.y = Math.floor(Math.random() * (595 - 1 + 1)) + 1;
+                _this.x = _this.GetRandomValue(855);
+                _this.y = _this.GetRandomValue(555);
             }, 600);
+        };
+        Pirate.prototype.GetRandomValue = function (upperLimit) {
+            return Math.floor(Math.random() * (upperLimit - 1 + 1)) + 1;
         };
         return Pirate;
     }(createjs.Bitmap));

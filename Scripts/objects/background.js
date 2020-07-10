@@ -18,11 +18,6 @@ var objects;
         function Background(assetManager) {
             return _super.call(this, assetManager.getResult("titleScreenBackground")) || this;
         }
-        Background.prototype.Start = function () { };
-        Background.prototype.Update = function () { };
-        Background.prototype.Reset = function () { };
-        Background.prototype.Move = function () { };
-        Background.prototype.CheckBound = function () { };
         return Background;
     }(createjs.Bitmap));
     objects.Background = Background;

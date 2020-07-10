@@ -15,16 +15,16 @@ module objects {
       this.y = y;
 
       // Set up event handlers
-      this.on("mouseover", this.mouseOver);
-      this.on("mouseout", this.mouseOut);
+      this.on("mouseover", this.MouseOver);
+      this.on("mouseout", this.MouseOut);
     }
     // Methods
     // Event Handlers
-    private mouseOver(): void {
+    private MouseOver(): void {
       this.alpha = 0.85;
     }
 
-    private mouseOut(): void {
+    private MouseOut(): void {
       this.alpha = 1.0;
     }
   }

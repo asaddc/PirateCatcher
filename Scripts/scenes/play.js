@@ -23,16 +23,37 @@ var scenes;
         }
         PlayScene.prototype.Start = function () {
             console.log("Play scene start");
-            // Inintialize our variables
-            this.pirate = new objects.Pirate(this.assetManager, "pirate", 400, 300);
+            // Initialize our variables
+            this.pirate = new objects.Pirate(this.assetManager, "pirate", this.GetRandomValue(855), this.GetRandomValue(555));
             this.background = new objects.Background(this.assetManager);
+            this.timer = new objects.Label("0", "50px", "Consolas", "blue", 20, 20);
+            createjs.Ticker.framerate = 120;
+            this.timerWhenSceneStarted = createjs.Ticker.getEventTime();
+            createjs.Ticker.on("tick", this.Update);
             this.Main();
         };
-        PlayScene.prototype.Update = function () { };
+        PlayScene.prototype.Update = function () {
+            if (this.timer != null) {
+                console.log(this.timer);
+                this.timer.text = ((createjs.Ticker.getEventTime() - this.timerWhenSceneStarted) /
+                    1000).toFixed(2);
+            }
+        };
         PlayScene.prototype.Main = function () {
             this.addChild(this.background);
+            this.addChild(this.timer);
             this.addChild(this.pirate);
             // Register for click events
+            this.pirate.on("click", this.PirateCaught);
+        };
+        PlayScene.prototype.PirateCaught = function () {
+            // objects.Game.currentScene = config.Scene.GAME_OVER;
+            // stage.removeAllChildren();
+            //   currentScene = new scenes.GameOverScene(assetManager);
+            //   stage.addChild(currentScene);
+        };
+        PlayScene.prototype.GetRandomValue = function (upperLimit) {
+            return Math.floor(Math.random() * (upperLimit - 1 + 1)) + 1;
         };
         return PlayScene;
     }(objects.Scene));

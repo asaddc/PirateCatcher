@@ -16,7 +16,7 @@ var scenes;
     var GameOverScene = /** @class */ (function (_super) {
         __extends(GameOverScene, _super);
         // Constructor
-        function GameOverScene(assetManager) {
+        function GameOverScene(assetManager, timeCompleted) {
             var _this = _super.call(this, assetManager) || this;
             _this.Start();
             return _this;

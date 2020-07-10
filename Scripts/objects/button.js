@@ -25,16 +25,16 @@ var objects;
             _this.x = x;
             _this.y = y;
             // Set up event handlers
-            _this.on("mouseover", _this.mouseOver);
-            _this.on("mouseout", _this.mouseOut);
+            _this.on("mouseover", _this.MouseOver);
+            _this.on("mouseout", _this.MouseOut);
             return _this;
         }
         // Methods
         // Event Handlers
-        Button.prototype.mouseOver = function () {
+        Button.prototype.MouseOver = function () {
             this.alpha = 0.85;
         };
-        Button.prototype.mouseOut = function () {
+        Button.prototype.MouseOut = function () {
             this.alpha = 1.0;
         };
         return Button;
